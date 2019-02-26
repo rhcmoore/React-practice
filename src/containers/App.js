@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // allows us to import classes scoped to this file
 import classes from './App.css';
 import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit"
 
 class App extends Component {
   state = {
@@ -52,7 +53,6 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
@@ -63,26 +63,14 @@ class App extends Component {
             changed={this.nameChangeHandler}/>
         </div>
       );
-      btnClass = classes.Red;
-    }
-
-    const assignedClasses = [];
-    if (this.state.persons.length < 3) {
-      assignedClasses.push( classes.red );
-    }
-    if (this.state.persons.length < 2) {
-      assignedClasses.push( classes.bold );
     }
     
     return (
       <div className={classes.App}>
-        <h1>React starter</h1>
-        <p className={assignedClasses.join(" ")}>This is working</p>
-        <button 
-          className={btnClass}
-          onClick={this.togglePersonsHandler}>
-          Toggle People
-        </button>
+      <Cockpit 
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked={this.togglePersonsHandler}/>
         {persons}
       </div>
     );
