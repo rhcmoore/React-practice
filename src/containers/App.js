@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from "./Person/Person.js";
+// allows us to import classes scoped to this file
+import classes from './App.css';
+import Person from "../components/Persons/Person/Person.js";
 
 class App extends Component {
   state = {
@@ -50,16 +51,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit", 
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
-
     let persons = null;
+    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
@@ -67,7 +60,7 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             return (
               <Person
-                key={person.id} 
+                key={person.id}
                 name={person.name}
                 age={person.age}
                 changed={(event) => this.nameChangeHandler(event, person.id)}
@@ -76,28 +69,23 @@ class App extends Component {
           })}
         </div>
       );
-
-      style.backgroundColor = "red";
-      style["hover"] = {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length < 3) {
-      classes.push("red");
+      assignedClasses.push( classes.red );
     }
     if (this.state.persons.length < 2) {
-      classes.push("bold");
+      assignedClasses.push( classes.bold );
     }
     
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>React starter</h1>
-        <p className={classes.join(" ")}>This is working</p>
+        <p className={assignedClasses.join(" ")}>This is working</p>
         <button 
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonsHandler}>
           Toggle People
         </button>
@@ -108,49 +96,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import React, { useState } from 'react';
-// import './App.css';
-// import Person from "./Person/Person.js"
-
-// const app = props => {
-//   // passing initial state
-//   // useState returns array with 2 elements:
-//     // 1) current state
-//     // 2) function that allows us to update state for re-render
-//   const [ personsState, setPersonsState ] = useState({
-//   // ^^ array destructuring for the 2 elements
-//     persons: [
-//       {name: "max", age: 22},
-//       {name: "jim", age: 33},
-//       {name: "jane", age: 44}
-//     ]
-//   });
-
-//   const [otherState, setOtherState] = useState("some other value")
-
-//   console.log(personsState, otherState);
-
-//   const switchNameHandler = () => {
-//     setPersonsState({
-//       persons: [
-//         {name: "Miller", age: 22},
-//         {name: "jim", age: 33},
-//         {name: "Jasdasd", age: 44}
-//       ],
-//       otherState: personsState.otherState
-//     })
-//   }
-
-//   return (
-//     <div className="App">
-//       <h1>React starter</h1>
-//       <button onClick={switchNameHandler}>Switch Name</button>
-//       <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-//       <Person name={personsState.persons[1].name} age={personsState.persons[1].age}/>
-//       <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
-//     </div>
-//   );
-// }
-
-// export default app;
