@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // allows us to import classes scoped to this file
 import classes from './App.css';
-import Person from "../components/Persons/Person/Person.js";
+import Persons from "../components/Persons/Persons";
 
 class App extends Component {
   state = {
@@ -57,16 +57,10 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                key={person.id}
-                name={person.name}
-                age={person.age}
-                changed={(event) => this.nameChangeHandler(event, person.id)}
-                click={() => this.deletePersonHandler(index)}/>
-            );
-          })}
+          <Persons 
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}/>
         </div>
       );
       btnClass = classes.Red;
