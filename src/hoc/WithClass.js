@@ -12,7 +12,8 @@ import React from "react";
 const withClass = (WrappedComponent, className) => {
     return props => (
         <div className={className}>
-            <WrappedComponent />
+            {/* Using {...props} to pass all props through */}
+            <WrappedComponent {...props} />
         </div>
     );
 }
