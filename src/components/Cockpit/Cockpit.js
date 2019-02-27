@@ -1,10 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
 import AuthContext from "../../context/auth-context";
 
 const cockpit = (props) => {
     // using useRef hook
     const toggleButtonRef = useRef(null);
+    // hooking into auth-context data
+    const authContext = useContext(AuthContext);
+
+    // returns authContext object
+    console.log(authContext)
 
     // executes every render cycle, 
     // so we can use like componentDidMount/Update 
@@ -46,9 +51,9 @@ const cockpit = (props) => {
                 onClick={props.clicked}>
                 Toggle People
             </button>
-            <AuthContext.Consumer>
-                {context => <button onClick={context.login}>Log In</button>}
-            </AuthContext.Consumer>
+            <button onClick={authContext.login}>
+                Log In
+            </button>
         </div>
     );
 }

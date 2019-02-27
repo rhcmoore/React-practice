@@ -11,20 +11,24 @@ class Person extends Component {
         this.inputElementRef = React.createRef();
     }
 
+    // property available to class-based components for context
+    // React connects component to context, and 
+    // gives us access to 'this', which holds auth info
+    static contextType = AuthContext;
+
     // focuses on the input
     componentDidMount() {
         this.inputElementRef.current.focus();
+        console.log(this.context)
     }
 
     render() {
         return (
             // Using Aux as a wrapper to return a single expression
             <React.Fragment>
-                <AuthContext.Consumer>
-                    {(context) => 
-                        context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>
-                    }
-                </AuthContext.Consumer>
+                
+                {this.context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
+                    
             
                 <p key="i1" onClick={this.props.click}>
                     Me llamo {this.props.name} and I'm {this.props.age} 
