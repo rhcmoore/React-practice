@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Person from "./Person/Person"
 
-class Persons extends Component {
+// PureComponent is a normal component that adds a
+// shouldComponentUpdate that checks all props for changes
+class Persons extends PureComponent {
 
     // static getDerivedStateFromProps(props, state) {
     //     console.log("Persons.js getDerivedState")
@@ -10,11 +12,17 @@ class Persons extends Component {
     // }
 
     // boolean to decide whether or not a component should update
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("Persons.js shouldComponentUpdate")
-        // placeholder
-        return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("Persons.js shouldComponentUpdate")
+    //     // if props don't change, don't re-render
+    //     // use if parent component could change without... 
+    //     // ...affecting this component
+    //     return (
+    //         nextProps.persons !== this.props.persons ||
+    //         nextProps.change !== this.props.changed ||
+    //         nextProps.clicked !== this.props.clicked
+    //     )
+    // }
 
     // grabs props/state values before a component updates
     getSnapshotBeforeUpdate(prevProps, prevState) {
