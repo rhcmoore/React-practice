@@ -8,10 +8,10 @@ const cockpit = (props) => {
     // (and we can have multiple)
     useEffect(() => {
         console.log("cockpit.js useEffect")
-        setTimeout(() => {
-            // Fake HTTP request
-            alert("Saved data to cloud")
-        }, 1000);
+        // setTimeout(() => {
+        //     // Fake HTTP request
+        //     alert("Saved data to cloud")
+        // }, 1000);
         return() => {
             // would display if cockpit component was removed
             console.log("cockpit.js cleanup work in useEffect")
